@@ -1,12 +1,7 @@
 import { useGoogleLogin } from '@react-oauth/google';
-import { Lato } from 'next/font/google'
+import { lato } from './page';
 import Image from 'next/image'
 import styles from './styles/page.module.css'
-
-const lato = Lato({
-    subsets: ['latin'],
-    weight: '400'
-})
 
 export default function SignIn() {
 

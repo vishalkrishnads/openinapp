@@ -1,0 +1,63 @@
+.before {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0; /* Start with opacity 0 to hide the div initially */
+    transform: translateY(20px); /* Start with a 20px vertical offset */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out; 
+}
+
+.after {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1; /* Make the div visible */
+    transform: translateY(0); /* Remove the vertical offset */
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out; 
+}
+
+.card {
+    width: 90%;
+    height: 90%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #DDEFE0;
+}
+
+.content {
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.icon {
+    flex: 2;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.label {
+    flex: 0.5;
+    display: flex;
+    color: black;
+    align-items: flex-end;
+}
+
+.label h2 {
+    font-size: 14px;
+}
+
+.value {
+    flex: 2;
+    display: flex;
+}
+
+.value h1 {
+    color: black;
+}

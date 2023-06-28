@@ -9,6 +9,13 @@
 
 .cards {
     flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.cards .container {
+    width: 90%;
+    display: flex;
 }
 
 .chart {
@@ -18,7 +25,7 @@
     align-items: center;
 }
 
-.legend {
+.chart .legend {
     display: flex;
     height: 40%;
     width: 10%;
@@ -27,7 +34,7 @@
     justify-content: flex-end;
 }
 
-.legend p {
+.chart .legend p {
     font-size: 14px;
 }
 
@@ -85,6 +92,13 @@
     display: flex
 }
 
+.details .schedulecontainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .detail {
     width: 90%;
     height: 95%;
@@ -122,6 +136,76 @@
     color: #858585;
 }
 
+.products {
+    flex: 1;
+    display: flex;
+}
+
+.products .pie {
+    height: 80%;
+    width: 90%;
+}
+
+.products .legends {
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+}
+
+.products .legends .one {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.products .legends .two {
+    flex: 1;
+    display: flex;
+}
+
+.products .legends .placeholder {
+    flex: 0.4
+}
+
+.products .legend {
+    flex: 1;
+    display: flex;
+}
+
+.products .legend h4 {
+    font-size: 14px;
+}
+
+.products .legend .icon  {
+    margin-top: 20%;
+}
+
+.schedule {
+    flex: 1;
+    display: flex;
+}
+
+.schedule .border {
+    flex: 0.4;
+    display: flex;
+    align-items: center;
+}
+
+.schedule .text {
+    flex: 12;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.schedule .text p {
+    font-size: 12px;
+}
+
+.schedule .text h6 {
+    font-weight: 500;
+}
+
 @media only screen and (max-width: 1000px) {
 
     
@@ -130,11 +214,17 @@
     }
 
     .dashboard .cards {
-        min-height: 400px;
+        min-height: 600px;
+        margin-top: 100px;
+        margin-bottom: 20px;
+    }
+
+    .dashboard .cards .container {
+        flex-direction: column;
     }
 
     .chart .container {
-        min-height: 400px;
+        min-height: 300px;
     }
     
     .chart .header {
@@ -148,6 +238,10 @@
 
     .details {
         min-height: 800px;
+    }
+
+    .details .schedulecontainer {
+        height: 50px;
     }
 
     .detail {
@@ -171,7 +265,29 @@
         flex-direction: column;
     }
 
-    .legend {
+    .chart .legend {
         margin-right: 10%;
     }
+
+    .products {
+        flex-direction: column;
+    }
+
+    .products .pie {
+        height: 90%;
+        width: 100%
+    }
+
+    .products .legends .placeholder {
+        flex: 0.8
+    }
+
+    .products .legends {
+        flex-direction: row;
+    }
+    
+    .products .legend .icon  {
+        margin-top: 25%;
+    }
+
 }

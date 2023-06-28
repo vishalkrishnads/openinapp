@@ -2,16 +2,10 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Lato } from 'next/font/google'
+import { lato } from '../page'
 import Image from 'next/image'
 import Link from 'next/link'
 import './styles/layout.css'
-
-const lato = Lato({
-    subsets: ['latin'],
-    weight: '400'
-  })
-
   
 const ROUTES = [
     { label: 'Dashboard', route: '/', icon: 'dashboard.png' },

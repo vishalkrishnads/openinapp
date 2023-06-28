@@ -1,8 +1,14 @@
 'use client'
 
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { Lato } from 'next/font/google'
 import styles from './styles/page.module.css'
 import SignIn from './signin';
+
+export const lato = Lato({
+  subsets: ['latin'],
+  weight: '400'
+})
 
 export default function Home() {
 
