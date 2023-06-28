@@ -132,6 +132,8 @@ section {
 
     .navbar {
       position: fixed;
+      top: 0;
+      margin-top: 5%;
       left: -280px; /* Move the navbar off-screen by default */
       transform: translateX(0);
       z-index: 100;
@@ -139,5 +141,15 @@ section {
   
     .navbar.visible {
       transform: translateX(290px); /* Slide the navbar into view */
+    }
+  }
+
+  @media only screen and (max-width: 1000px) {
+    .header {
+        position: fixed;
+        top: 0;
+        width: 95%;
+        height: 10%;
+        background-color: #F5F5F5;
     }
   }

@@ -74,7 +74,7 @@ export default function Layout({ children }) {
         <Navbar active={active} setActive={setActive} mobile={isNavbarVisible} toggle={setIsNavbarVisible} />
         </div>
         <div className='page'>
-            <div style={{ flex: '0.75' }} />
+            <div style={{ flex: '0.45' }} />
             <div className='header'>
                 <div style={{ flex: '1', display: 'flex', alignItems: 'center' }}>
                     <div onClick={() => setIsNavbarVisible(!isNavbarVisible)} className='mobile'>
