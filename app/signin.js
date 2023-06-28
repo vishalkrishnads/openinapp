@@ -1,16 +1,22 @@
-import { useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin, googleLogout } from '@react-oauth/google';
+import { useRouter } from 'next/navigation';
 import { lato } from './page';
 import Image from 'next/image'
 import styles from './styles/page.module.css'
 
 export default function SignIn() {
 
+  const router = useRouter();
+
     const login = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
+        onSuccess: tokenResponse => {
+          localStorage.setItem('vishalisted', tokenResponse.access_token)
+          router.push('/dashboard')
+        },
       });
 
     const Button = ({isLeft, icon, label}) => {
-        return <div onClick={() => login()} style={{ marginRight: isLeft ? 25 : 0 }} className={styles.button}>
+        return <div onClick={() => {googleLogout(); login()}} style={{ marginRight: isLeft ? 25 : 0 }} className={styles.button}>
           <div style={{ flex: 1 }} />
           <div className={styles.icon}>
             <Image

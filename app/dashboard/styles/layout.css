@@ -116,6 +116,10 @@ section {
     flex: 11;
 }
 
+.dp:hover {
+    cursor: pointer;
+}
+
 @media (max-width: 1500px) {
     /* Mobile view */
     .nav {

@@ -1,9 +1,13 @@
+'use client'
+
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { Lato } from 'next/font/google';
 import Chart from './components/chart';
 import styles from './styles/page.module.css'
 import PieChart from './components/pie';
 import Card from './components/card';
+import { refresh } from '../api/data';
 
 const lato = Lato({
     subsets: ['latin'],
@@ -12,11 +16,27 @@ const lato = Lato({
 
 export default function Home() {
 
-    const data = {
-        labels: ['Label 1', 'Label 2', 'Label 3'],
-        values: [30, 50, 20],
-        colors: ['#FF6384', '#36A2EB', '#FFCE56'],
-      };
+    const [cards, setCards] = useState([])
+    const [schedules, setSchedules] = useState([])
+    const [pie, setPie] = useState({})
+    const [chart, setChart] = useState({})
+    const [buffering, setBuffering] = useState(true)
+    const [error, isError] = useState(false)
+
+    useEffect(() => {
+        async function refreshData() {
+            await refresh()
+            .then((response) => {
+                setCards(response.cards)
+                setSchedules(response.schedule)
+                setPie(response.pie)
+                setChart(response.chart)
+            })
+            .catch((err) => {console.error(err); isError(true)})
+            setBuffering(false)
+        }
+        refreshData();
+    }, [])
 
     function Detail({children, label, filter, icon}) {
         return <div className={styles.detail}>
@@ -42,9 +62,6 @@ export default function Home() {
     }
 
     function Activities() {
-        const labels = ['Label 1', 'Label 2', 'Label 3', 'Label 1', 'Label 2', 'Label 3'];
-        const data1 = [3, 14, 15];
-        const data2 = [5, 15, 10];
     
         function Legend({icon, label}) {
             return <div className={styles.legend}>
@@ -84,7 +101,7 @@ export default function Home() {
                 </div>
                 <div style={{flex: 4, display: 'flex', justifyContent: 'center', alignItems: 'center'}} >
                     <div style={{width: '92%', height: '85%'}}>
-                        <Chart labels={labels} data1={data1} data2={data2} />
+                        {Object.keys(chart).length > 0 ? <Chart labels={chart.labels} data1={chart.data1} data2={chart.data2} /> : null}
                     </div>
                 </div>
             </div>
@@ -105,7 +122,7 @@ export default function Home() {
                 </div>
                 <div style={{flex: 5, display: 'flex', flexDirection: 'column'}}>
                     <h4>{label}</h4>
-                    <p>{value}</p>
+                    <p>{value}%</p>
                 </div>
             </div>
         }
@@ -113,16 +130,16 @@ export default function Home() {
             <div style={{flex: 0.2}}/>
             <div style={{flex: 5, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
                 <div className={styles.pie} style={{height: '80%', width: '90%'}}>
-                    <PieChart data={data} />
+                    {Object.keys(pie).length > 0 ? <PieChart data={pie} /> : null}
                 </div>
             </div>
             <div className={styles.legends}>
                 <div className={styles.placeholder} />
-                <div className={styles.one}>
-                    <Legend label={'Basic Tee'} value={55} icon={'/user.png'} />
-                    <Legend label={'Short Pants'} value={31} icon={'/pants.png'} />
-                    <Legend label={'Super Hoodies'} value={14} icon={'/guest.png'} />
-                </div>
+                {Object.keys(pie).length > 0 ? <div className={styles.one}>
+                    <Legend label={'Basic Tee'} value={pie.values[0]} icon={'/user.png'} />
+                    <Legend label={'Short Pants'} value={pie.values[1]} icon={'/pants.png'} />
+                    <Legend label={'Super Hoodies'} value={pie.values[2]} icon={'/guest.png'} />
+                </div>:<div className={styles.one} />}
             </div>
             <div style={{flex: 0.2}}/>
         </div>
@@ -141,46 +158,59 @@ export default function Home() {
         </div>
     }
 
-    return <div className={styles.dashboard} >
-        <div className={styles.cards}>
-            <div className={styles.container}>
-                <Card delay={0} value={2129430} />
-                <Card delay={100} value={1520} />
-                <Card delay={200} value={9721}/>
-                <Card delay={300} value={892} />
+    return (
+        <>
+            {!error ? 
+            buffering ? <div style={{ flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <span className={styles.loader} />
             </div>
-        </div>
-        <Activities />
-        <div className={styles.details}>
-            <div className={styles.responsive}>
-                <div className={styles.container}>
-                    <Detail 
-                        label={'Top Products'}
-                        filter={'May 2023 - Jun 2023'}
-                        icon={'/dropdown.png'}
-                        >
-                            <Products />
-                    </Detail>
+             : <div className={styles.dashboard} >
+                <div className={styles.cards}>
+                    <div className={styles.container}>
+                        {cards.map((item, index) => {
+                            return <Card key={index} delay={item.delay} label={item.label} value={item.value} isCurrency={index === 0} color={item.color} icon={item.icon} />
+                        })}
+                    </div>
                 </div>
-                <div className={styles.container}>
-                    <Detail 
-                        label={"Today's schedule"}
-                        filter={'See All'}
-                        icon={'/side.png'}
-                        >
-                            <div style={{flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                <div style={{height: '80%', width: '83%', display: 'flex', flexDirection: 'column'}}>
-                                    <div style={{flex: 0.2}} />
-                                    <div style={{ flex: 2, display: 'flex', flexDirection: 'column' }}>
-                                        <Schedule color={'#9BDD7C'} task={'Meeting with suppliers'} time={'14:00 - 15:00'} place={'at Sunset Road'} />
-                                        <Schedule color={'#6972C3'} task={'Check operation at Giga Factory'} time={'18:00 - 20:00'} place={'at Central Jakarta'} />
+                <Activities />
+                <div className={styles.details}>
+                    <div className={styles.responsive}>
+                        <div className={styles.container}>
+                            <Detail 
+                                label={'Top Products'}
+                                filter={'May 2023 - Jun 2023'}
+                                icon={'/dropdown.png'}
+                                >
+                                    <Products />
+                            </Detail>
+                        </div>
+                        <div className={styles.container}>
+                            <Detail 
+                                label={"Today's schedule"}
+                                filter={'See All'}
+                                icon={'/side.png'}
+                                >
+                                    <div style={{flex: 1, display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                                        <div style={{height: '80%', width: '83%', display: 'flex', flexDirection: 'column'}}>
+                                            <div style={{flex: 0.2}} />
+                                            <div style={{ flex: 2, display: 'flex', flexDirection: 'column' }}>
+                                                {schedules.map((item, index) => {
+                                                    return <Schedule key={index} color={index === 0 ? '#9BDD7C' : '#6972C3'} task={item.activity} time={item.timePeriod} place={item.place} />    
+                                                })}
+                                            </div>
+                                            <div style={{flex: 0.2}} />
+                                        </div>
                                     </div>
-                                    <div style={{flex: 0.2}} />
-                                </div>
-                            </div>
-                    </Detail>
+                            </Detail>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+            :
+            <div style={{ flex: 1, color: 'black', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                <p>Uh, oh! Something unexpected happened. :(</p>
+                <p>Please verify your intenet connection</p>
+            </div>}
+        </>
+    )
 }

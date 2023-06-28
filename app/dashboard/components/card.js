@@ -11,7 +11,7 @@ const sans = Open_Sans({
     weight: '700'
 })
 
-export default function Card({ delay, value }) {
+export default function Card({ delay, value, label, isCurrency, color, icon }) {
 
     const [loaded, setLoaded] = React.useState(styles.before);
     const [display, setDisplay] = React.useState(0);
@@ -63,21 +63,21 @@ export default function Card({ delay, value }) {
       
 
     return <div className={loaded}>
-        <div className={styles.card}>
+        <div style={{ backgroundColor: color }} className={styles.card}>
             <div className={styles.content}>
                 <div className={styles.icon}>
                     <Image
-                        src={'/revenues.png'}
+                        src={icon}
                         width={26}
                         height={24}
                         alt={''}
                     />
                 </div>
                 <div className={styles.label}>
-                    <h2 className={lato.className}>Total Revenues</h2>
+                    <h2 className={lato.className}>{label}</h2>
                 </div>
                 <div className={styles.value}>
-                    <h1 className={sans.className}>{addCommas(display)}</h1>
+                    <h1 className={sans.className}>{`${isCurrency ? '$':''}${addCommas(display)}`}</h1>
                 </div>
             </div>
         </div>

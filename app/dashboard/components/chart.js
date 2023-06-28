@@ -11,19 +11,19 @@ const Charts = ({ labels, data1, data2 }) => {
     labels: labels,
     datasets: [
       {
-        label: 'Data 1',
+        label: 'Guest',
         data: data1,
         backgroundColor: 'rgba(75,192,192,0.4)',
-        borderColor: 'rgba(75,192,192,1)',
+        borderColor: '#E9A0A0',
         borderWidth: 2,
         pointRadius: 0,
         tension: 0.5
       },
       {
-        label: 'Data 2',
+        label: 'User',
         data: data2,
         backgroundColor: 'rgba(255,99,132,0.4)',
-        borderColor: 'rgba(255,99,132,1)',
+        borderColor: '#9BDD7C',
         borderWidth: 2,
         pointRadius: 0,
         tension: 0.5
@@ -36,6 +36,14 @@ const Charts = ({ labels, data1, data2 }) => {
     scales: {
       y: {
         beginAtZero: true,
+        ticks: {
+          stepSize: 100,
+          callback: (value) => {
+            return value === 0 ? value : value.toString();
+          },
+          max: 500,
+          min: 0,
+        },
       },
       x: {
         grid: {
