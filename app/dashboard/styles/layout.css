@@ -140,7 +140,7 @@ section {
       margin-top: 5%;
       left: -280px; /* Move the navbar off-screen by default */
       transform: translateX(0);
-      z-index: 100;
+      z-index: 102;
     }
   
     .navbar.visible {
