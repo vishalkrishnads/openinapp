@@ -4,7 +4,6 @@
     height: 95%;
     width: 95%;
     flex-direction: column;
-    overflow-y: hidden;
 }
 
 .cards {
@@ -258,7 +257,7 @@
 
     
     .dashboard {
-        overflow-y: scroll;
+        overflow-y: hidden;
     }
 
     .dashboard .cards {
