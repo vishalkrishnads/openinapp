@@ -121,6 +121,12 @@ section {
     cursor: pointer;
 }
 
+@media (max-width: 1650px) {
+    .nav {
+        flex: 2
+    }
+}
+
 @media (max-width: 1500px) {
     .nav {
         flex: 2.5;
