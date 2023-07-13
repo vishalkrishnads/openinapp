@@ -48,17 +48,18 @@ section {
 }
 
 .link:hover p {
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .link p {
     margin-left: 8%;
     font-size: 18px;
+    font-weight: 600;
     transition: 0.5s;
 }
 
-.active {
-    font-weight: 700;
+.link .active {
+    font-weight: 800;
 }
 
 .meta {
@@ -121,6 +122,18 @@ section {
 }
 
 @media (max-width: 1500px) {
+    .nav {
+        flex: 2.5;
+    }
+}
+
+@media (max-width: 1000px) {
+    .nav {
+        flex: 3
+    }
+}
+
+@media (max-width: 999px) {
     /* Mobile view */
     .nav {
         flex: 0.3;
@@ -146,6 +159,7 @@ section {
     .navbar.visible {
       transform: translateX(290px); /* Slide the navbar into view */
     }
+    
   }
 
   @media only screen and (max-width: 1000px) {

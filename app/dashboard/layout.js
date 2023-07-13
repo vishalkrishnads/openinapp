@@ -38,6 +38,7 @@ export default function DashboardLayout({ children }) {
             <div className='page'>
                 <div style={{ flex: '0.45' }} />
                 <div className='header'>
+                    <div style={{flex: '0.1'}} />
                     <div style={{ flex: '1', display: 'flex', alignItems: 'center' }}>
                         <div onClick={() => setIsNavbarVisible(!isNavbarVisible)} className='mobile'>
                             <Image

@@ -257,7 +257,7 @@
 
     
     .dashboard {
-        overflow-y: hidden;
+        height: auto;
     }
 
     .dashboard .cards {
@@ -283,13 +283,18 @@
         flex-direction: column;
     }
 
+    .chart .container h3 {
+        font-size: 20px;
+    }
+
     .details {
         min-height: 800px;
     }
 
     .detail {
-        min-height: 200px;
-        margin-top: 50px;
+        min-height: 400px;
+        margin-top: 40px;
+        margin-bottom: 10px;
     }
     .detail .header {
         flex-direction: column;

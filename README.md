@@ -125,4 +125,4 @@ Follow these instructions to get the project up and running on your local machin
 Done! The app should be up and running by now on [port 3000](http://localhost:3000). You can get started by editing `/app/page.js`.
 
 ## Contributing
-Since this is the submission of an assignment, the code might be evaluated. As such, this repository is not accepting any contributions as of now. In order to maintain the authenticity of submission, the last commit will be on 29th of June, 2023 and no changes would be made afterwards, until the evaluation is complete.
+Since this is the submission of an assignment, the code might be evaluated. As such, this repository is not accepting any contributions as of now. In order to maintain the authenticity of submission, the last commit will be on 13th of July, 2023 and no changes would be made afterwards, until the evaluation is complete.

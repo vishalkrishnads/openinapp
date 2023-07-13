@@ -4,7 +4,7 @@
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
-import '../../styles/globals.css'
+import '../styles/layout.css'
   
 export const ROUTES = [
     { label: 'Dashboard', route: '/', icon: 'dashboard.png' },
